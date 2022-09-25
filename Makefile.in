@@ -5,26 +5,27 @@
 #
 # - ASSIGNMENT		Name of the homework assignment to convert
 
+output_file	:=	README.md
 BUILD_DIR	:=	build
-R		:=	R --no-save
+R		:=	R --no-save -s
 
 .phony: clean all
 
-all: README.md
+all: $(output_file)
 
-README.md: $(ASSIGNMENT).Rmd $(BUILD_DIR)/gfmknit.R
+$(output_file): $(ASSIGNMENT).Rmd $(BUILD_DIR)/gfmknit.R
 	@echo "##########################################"
-	@echo "#              Creating $@               #"
+	@echo "  Creating $@"
 	@echo "##########################################"
 	$(R) < $(BUILD_DIR)/gfmknit.R
 	@echo "SUCCESS: $@ created"
 
 $(BUILD_DIR)/gfmknit.R: | $(BUILD_DIR)
 	@echo "##########################################"
-	@echo "#              Creating $@               #"
+	@echo "  Creating $@"
 	@echo "##########################################"
 	echo "library(knitr)" > $@
-	echo "knit('$(ASSIGNMENT).Rmd', output='README.md')" >> $@
+	echo "knit('$(ASSIGNMENT).Rmd', output='$(output_file)')" >> $@
 	@echo "SUCCESS: $@ created"
 
 $(BUILD_DIR):
