@@ -1,0 +1,34 @@
+# Makefile to knit rmd source to gfm source
+#
+# To use, define the following variables when including this
+# file:
+#
+# - ASSIGNMENT		Name of the homework assignment to convert
+
+BUILD_DIR	:=	build
+R		:=	R --no-save
+
+.phony: clean all
+
+all: README.md
+
+README.md: $(ASSIGNMENT).Rmd $(BUILD_DIR)/gfmknit.R
+	@echo "##########################################"
+	@echo "#              Creating $@               #"
+	@echo "##########################################"
+	$(R) < $(BUILD_DIR)/gfmknit.R
+	@echo "SUCCESS: $@ created"
+
+$(BUILD_DIR)/gfmknit.R: | $(BUILD_DIR)
+	@echo "##########################################"
+	@echo "#              Creating $@               #"
+	@echo "##########################################"
+	echo "library(knitr)" > $@
+	echo "knit('$(ASSIGNMENT).Rmd', output='README.md')" >> $@
+	@echo "SUCCESS: $@ created"
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+clean:
+	$(RM) -R $(BUILD_DIR)

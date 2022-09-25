@@ -1,0 +1,22 @@
+---
+title: Homework 09/27
+author: Tyler J. Anderson
+output: github_document
+---
+
+# Heading 1
+
+## Subheading
+
+```{R}
+# Some R code
+library(dplyr)
+library(nycflights13)
+
+flights %>% group_by(carrier) %>%
+    summarize(mean_delay = mean(arr_delay, na.rm = T))
+```
+
+# Heading 2
+
+Some information.
