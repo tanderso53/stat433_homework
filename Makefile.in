@@ -24,8 +24,8 @@ $(BUILD_DIR)/gfmknit.R: | $(BUILD_DIR)
 	@echo "##########################################"
 	@echo "  Creating $@"
 	@echo "##########################################"
-	echo "library(knitr)" > $@
-	echo "knit('$(ASSIGNMENT).Rmd', output='$(output_file)')" >> $@
+	echo "library(rmarkdown)" > $@
+	echo "render('$(ASSIGNMENT).Rmd', output_file='$(output_file)', clean=T)" >> $@
 	@echo "SUCCESS: $@ created"
 
 $(BUILD_DIR):
