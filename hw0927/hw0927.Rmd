@@ -17,6 +17,10 @@ library(nycflights13)
 library(ggplot2)
 ```
 
+This document lives in a repository that can be pointed to at:
+
+[Github repo homework folder](https://github.com/tanderso53/stat433_homework/tree/main/hw0927)
+
 # Problem 1
 
 > How many flights have a missing `dep_time`? what other variables are
